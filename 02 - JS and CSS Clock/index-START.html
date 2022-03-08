@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS + CSS Clock</title>
 </head>
+
 <body>
 
 
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
-      </div>
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
     </div>
+  </div>
 
 
   <style>
@@ -43,17 +45,18 @@
       position: relative;
       padding: 2rem;
       box-shadow:
-        0 0 0 4px rgba(0,0,0,0.1),
+        0 0 0 4px rgba(0, 0, 0, 0.1),
         inset 0 0 0 3px #EFEFEF,
         inset 0 0 10px black,
-        0 0 10px rgba(0,0,0,0.2);
+        0 0 10px rgba(0, 0, 0, 0.2);
     }
 
     .clock-face {
       position: relative;
       width: 100%;
       height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
+      transform: translateY(-3px);
+      /* account for the height of the clock hands */
     }
 
     .hand {
@@ -62,13 +65,67 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: right;
     }
-
   </style>
 
   <script>
+    // const segundosDia = 86400;
+    // const dt = new Date();
+    // const secs = dt.getSeconds() + (60 * (dt.getMinutes() + (60 * dt.getHours())));
+
+    // document.querySelector(".hour-hand").style.transform = `rotate(${(((360 / 12) * ((secs / 3600) % 12)) + 90) % 360}deg)`;
+    // document.querySelector(".min-hand").style.transform = `rotate(${(((360 / 60) * ((secs / 60) % 60)) + 90) % 360}deg)`;
+    // document.querySelector(".second-hand").style.transform = `rotate(${(((360 / 60) * (secs % 60)) + 90) % 360}deg)`;
+
+    // setInterval(function () {
+    //   const hour = document.querySelector(".hour-hand").style.transform;
+    //   const minute = document.querySelector(".min-hand").style.transform;
+    //   const second = document.querySelector(".second-hand").style.transform;
+    //   const hourDeg = parseFloat(hour.substring(
+    //     hour.indexOf("(") + 1,
+    //     hour.indexOf(")") - 3
+    //   ));
+    //   const minuteDeg = parseFloat(minute.substring(
+    //     minute.indexOf("(") + 1,
+    //     minute.indexOf(")") - 3
+    //   ));
+    //   const secondDeg = parseFloat(second.substring(
+    //     second.indexOf("(") + 1,
+    //     second.indexOf(")") - 3
+    //   ));
+    //   console.log(hourDeg);
+    //   console.log(minuteDeg);
+    //   console.log(secondDeg);
+    //   document.querySelector(".hour-hand").style.transform = `rotate(${(hourDeg + (360 / (60 * 60 * 12))) % 360}deg)`;
+    //   document.querySelector(".min-hand").style.transform = `rotate(${(minuteDeg + (360 / (60 * 60))) % 360}deg)`;
+    //   document.querySelector(".second-hand").style.transform = `rotate(${(secondDeg + (360 / 60)) % 360}deg)`;
+    // }, 1000);
+
+
+
+
+
+
+    setInterval(function () {
+      const dateNow = new Date();
+      const secondsNow = parseInt(dateNow.getSeconds() + dateNow.getMinutes() * 60 + dateNow.getHours() * 60 * 60);
+
+      const hour = document.querySelector(".hour-hand");
+      const minute = document.querySelector(".min-hand");
+      const second = document.querySelector(".second-hand");
+
+      hour.style.transform = `rotate(${(360 / 12 * ((secondsNow / 3600) % 12)) + 90}deg)`;
+      hour.style.transform = `rotate(${(360 / 12 * ((secondsNow / 3600) % 12)) + 90}deg)`;
+      hour.style.transform = `rotate(${(360 / 12 * ((secondsNow / 3600) % 12)) + 90}deg)`;
+
+      // hour.style.transform = `rotate(${})`
+    }, 1000);
+
+
 
 
   </script>
 </body>
+
 </html>
