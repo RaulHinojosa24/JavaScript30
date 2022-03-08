@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Mouse Shadow</title>
 </head>
+
 <body>
 
   <div class="hero">
@@ -11,30 +13,45 @@
   </div>
 
   <style>
-  html {
-    color: black;
-    font-family: sans-serif;
-  }
+    html {
+      color: black;
+      font-family: sans-serif;
+    }
 
-  body {
-    margin: 0;
-  }
+    body {
+      margin: 0;
+    }
 
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-  }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+    }
 
-  h1 {
-    text-shadow: 10px 10px 0 rgba(0,0,0,1);
-    font-size: 100px;
-  }
+    h1 {
+      text-shadow: 10px 10px 0 rgba(0, 0, 0, 1);
+      font-size: 100px;
+    }
   </style>
 
-<script>
-</script>
+  <script>
+    window.addEventListener("mousemove", function (e) {
+      let windowX = window.innerWidth;
+      let windowY = window.innerHeight;
+      let cursorX = e.clientX;
+      let cursorY = e.clientY;
+
+      document.querySelector("h1").style.textShadow =
+        `
+        ${(windowX / 2 - cursorX) / -2}px ${(windowY / 2 - cursorY) / -2}px rgba(255, 20, 145, 0.7),
+        ${(windowX / 2 - cursorX) / 2}px ${(windowY / 2 - cursorY) / -2}px rgba(0, 255, 255, 0.7),
+        ${(windowY / 2 - cursorY) / -2}px ${(windowX / 2 - cursorX) / 2}px rgba(0, 255, 0, 0.7),
+        ${(windowY / 2 - cursorY) / 2}px ${(windowX / 2 - cursorX) / -2}px rgba(138, 43, 226, 0.7)
+        `;
+    });
+  </script>
 </body>
+
 </html>
