@@ -82,8 +82,8 @@
       const second = document.querySelector(".second-hand");
 
       hour.style.transform = `rotate(${(360 / secondsInClock * (secondsNow % secondsInClock)) + 90}deg)`;
-      minute.style.transform = `rotate(${(360 / (secondsInClock / 12) * (secondsNow % (60 * 60))) + 90}deg)`;
-      second.style.transform = `rotate(${360 / 60 * (secondsNow % 60)}deg)`;
+      minute.style.transform = `rotate(${(360 / (secondsInClock / 12) * (secondsNow % (secondsInClock / 12))) + 90}deg)`;
+      second.style.transform = `rotate(${(360 / 60 * (secondsNow % 60)) + 90}deg)`;
     }, 1000);
   </script>
 </body>
