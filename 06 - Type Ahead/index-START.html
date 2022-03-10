@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Type Ahead 👀</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <form class="search-form">
@@ -14,9 +16,56 @@
       <li>or a state</li>
     </ul>
   </form>
-<script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  <script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    const cities = [];
+    fetch(endpoint)
+      .then(blob => blob.json())
+      .then(data => cities.push(...data));
 
-</script>
+    const input = document.querySelector(".search");
+    const suggestions = document.querySelector(".suggestions");
+
+    input.addEventListener("input", function () {
+      const searchResults = [];
+      const searchInput = input.value;
+
+      cities.forEach(city => {
+        if ((city.city + ", " + city.state).toLowerCase().includes(searchInput.toLowerCase())) {
+          searchResults.push(city);
+        }
+      });
+
+      loadContent(searchResults, searchInput);
+    });
+
+    function loadContent(results, search) {
+      suggestions.innerHTML = "";
+
+      results.forEach(element => {
+        let liContainer = document.createElement("li");
+
+        let spanName = document.createElement("span");
+        spanName.classList.add("name");
+        spanName.innerHTML = highlightContent(element.city + ", " + element.state, search);
+
+        let spanPopulation = document.createElement("span");
+        spanPopulation.classList.add("population");
+        spanPopulation.textContent = (+element.population).toLocaleString();
+
+        liContainer.appendChild(spanName);
+        liContainer.appendChild(spanPopulation);
+
+        suggestions.appendChild(liContainer);
+      });
+    };
+
+    function highlightContent(string, important) {
+      return string.toLowerCase().replaceAll(important.toLowerCase(), `<span class="hl">${important}</span>`);
+    }
+
+
+  </script>
 </body>
+
 </html>
